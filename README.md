@@ -11,7 +11,6 @@ df = None
 
 
 ```python
-#__SOLUTION__
 # Raw Dataset
 import pandas as pd
 df = pd.read_csv('data/Divvy_Trips.csv')
@@ -183,7 +182,6 @@ In order to begin inspecting the data across different time intervals, we need t
 
 
 ```python
-#__SOLUTION__
 # Create datetime index based on the start time
 
 df['START TIME'] = pd.to_datetime(df['START TIME'])
@@ -202,7 +200,6 @@ We are going from a smaller unit of time to a larger unit, so we will downsample
 
 
 ```python
-#__SOLUTION__
 # Downsample to the hour and count the number of rides
 df_week = df.resample('W').count()['TRIP ID']
 df_week
@@ -238,7 +235,6 @@ We will slit of the last 52 weeks, 1 year, for our test set.
 
 
 ```python
-#__SOLUTION__
 # Train test split
 train = df_week[:-52]
 test = df_week[-52:]
@@ -266,7 +262,6 @@ train.plot()
 
 Describe the seasonality you see in the plot above.
 
-==SOLUTION==
 There is a repeating pattern that has a period of 1 year.  There are the lowest bike rental counts in the winter, most in the summer.
 
 It is harder to see if there is an overall upward or downard trend. To investigate trend, let's look at the rolling mean across a year.
@@ -278,7 +273,6 @@ It is harder to see if there is an overall upward or downard trend. To investiga
 
 
 ```python
-#__SOLUTION__
 train.rolling(52).mean().plot()
 ```
 
@@ -306,7 +300,6 @@ One way to remove trend this trend from the data is differencing.  A first order
 
 
 ```python
-#__SOLUTION__
 train.diff().rolling(52).mean().plot()
 
 ```
@@ -368,7 +361,6 @@ sm = SARIMAX(<your_code_here>).fit()
 
 
 ```python
-#__SOLUTION__
 sm = SARIMAX(train, order=[0,1,0]).fit()
 
 ```
@@ -380,7 +372,6 @@ sm = SARIMAX(train, order=[0,1,0]).fit()
 
 
 ```python
-#__SOLUTION__
 sm.predict()
 ```
 
@@ -410,7 +401,6 @@ sm.predict()
 
 
 ```python
-#__SOLUTION__
 from sklearn.metrics import mean_squared_error
 rmse = mean_squared_error(train, sm.predict(), squared=False)
 rmse
@@ -427,7 +417,6 @@ Next, calculate the test rmse.  To do this, you have to pass in the date of the 
 
 
 ```python
-#__SOLUTION__
 from sklearn.metrics import mean_squared_error
 rmse = mean_squared_error(test, sm.predict(test.index[0], test.index[-1]), squared=False)
 rmse
@@ -496,7 +485,6 @@ plot_predictions(test, model)
 
 
 ```python
-#__SOLUTION__
 model = print_ts_metrics(train, test, [1,1,1])
 plot_predictions(test, model)
 ```
@@ -513,7 +501,6 @@ plot_predictions(test, model)
 
 
 ```python
-#__SOLUTION__
 model = print_ts_metrics(train, test, [2,1,2])
 plot_predictions(test, model)
 
@@ -537,7 +524,6 @@ Take the best parameters from above, then add to it a 1st order seasonal differe
 
 
 ```python
-#__SOLUTION__
 model = print_ts_metrics( train, test, [2,1,1],[0,1,0,52])
 plot_predictions(test, model)
 
