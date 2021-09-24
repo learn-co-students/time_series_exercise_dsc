@@ -31,7 +31,7 @@ We are going from a smaller unit of time to a larger unit, so we will downsample
 
 Before we start looking at patterns in the data, perform a train test split.  We can't do it like we usually do. The sklearn version we use randomly picks points to assign to each set.  With time series data, we have to preserve the order, since the models depend on prior days.
 
-We will slit of the last 52 weeks, 1 year, for our test set.
+We will split of the last 52 weeks, 1 year, for our test set.
 
 
 ```python
@@ -69,12 +69,6 @@ The trend is much less pronounced, but still looks to be sloping downwards. Let'
 
 ```python
 # Apply a 2nd order difference: i.e. difference the difference, and plot the rolling mean.
-```
-
-
-```python
-train_week.diff().diff().rolling(52).mean().plot()
-
 ```
 
 The above eda gives us some clues about how to go about choosing the order in our SARIMAX models.  
