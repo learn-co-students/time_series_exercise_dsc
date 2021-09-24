@@ -44,19 +44,6 @@ We will slit of the last 52 weeks, 1 year, for our test set.
 train.plot()
 ```
 
-
-
-
-    <AxesSubplot:xlabel='START TIME'>
-
-
-
-
-    
-![png](index_files/index_9_1.png)
-    
-
-
 Describe the seasonality you see in the plot above.
 
 *YOUR ANSWER HERE*
@@ -89,19 +76,6 @@ The trend is much less pronounced, but still looks to be sloping downwards. Let'
 train_week.diff().diff().rolling(52).mean().plot()
 
 ```
-
-
-
-
-    <AxesSubplot:xlabel='START TIME'>
-
-
-
-
-    
-![png](index_files/index_19_1.png)
-    
-
 
 The above eda gives us some clues about how to go about choosing the order in our SARIMAX models.  
 The first choice of order will be the non-seasonal order. `p,d,q`. You can remember what those letters stand for by thinking AR=p, d=difference, MA=q.   The letters of the acronym aligns with the letters in the order argument.
