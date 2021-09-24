@@ -57,7 +57,7 @@ df_week
 
 Before we start looking at patterns in the data, perform a train test split.  We can't do it like we usually do. The sklearn version we use randomly picks points to assign to each set.  With time series data, we have to preserve the order, since the models depend on prior days.
 
-We will slit of the last 52 weeks, 1 year, for our test set.
+We will split of the last 52 weeks, 1 year, for our test set.
 
 
 ```python
@@ -122,6 +122,7 @@ The trend is much less pronounced, but still looks to be sloping downwards. Let'
 
 
 ```python
+#__SOLUTION__
 train_week.diff().diff().rolling(52).mean().plot()
 
 ```
