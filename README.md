@@ -54,7 +54,7 @@ df_week
 
 Before we start looking at patterns in the data, perform a train test split.  We can't do it like we usually do. The sklearn version we use randomly picks points to assign to each set.  With time series data, we have to preserve the order, since the models depend on prior days.
 
-We will slit of the last 52 weeks, 1 year, for our test set.
+We will split of the last 52 weeks, 1 year, for our test set.
 
 
 ```python
